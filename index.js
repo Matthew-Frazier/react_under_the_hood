@@ -26,6 +26,7 @@ class App extends React.Component {
       };
     });
 
+    // // setting state can be done this way as well
     // this.setState({ list: [ ...this.state.list, { id: this.getUniqueId(), title: item, } ] })
   };
 
@@ -113,14 +114,40 @@ class ItemForm extends React.Component {
     // return (
     //   <form onSubmit={this.handleSubmit}>
     //     <input 
-    //     onChange={this.handleChange}
-    //     value={this.state.title}
-    //     name="title"
-    //     placeholder="Add an item"
+    //       onChange={this.handleChange}
+    //       value={this.state.title}
+    //       name="title"
+    //       placeholder="Add an item"
     //     />
     //   </form>
     // )
   };
+};
+
+const Item = ({ id, title, complete, handleComplete, }) => {
+  return React.createElement(
+    "li",
+    { 
+      style: {
+      textDecoration: complete && "line-through",
+      color: complete && "grey",
+      },
+      onClick: () => handleComplete(id),
+    },
+    title
+  );
+  
+  // // this is what is happening behind the scenes
+  // return (
+  //   <li style={this.liStyle} onClick={ handleComplete(id) }>
+  //     { this.item.title }
+  //   </li>
+  // );
+
+  // const liStyle = () =>  {
+  //   const textDecoration = complete && "line-through";
+  //   const color = complete && "grey";
+  // };
 };
 
 const TodoList = ({ list, handleComplete, }) => {
@@ -140,20 +167,21 @@ const TodoList = ({ list, handleComplete, }) => {
       );
     })
   );
-};
 
-const Item = ({ id, title, complete, handleComplete, }) => {
-  return React.createElement(
-    "li",
-    { 
-      style: {
-      textDecoration: complete && "line-through",
-      color: complete && "grey",
-      },
-      onClick: () => handleComplete(id),
-    },
-    title
-  );
+  // // this is what is happening behind this scenes
+  // return (
+  //   <ul>
+  //     list.map( item => {
+  //       <Item 
+  //         key={ this.item.id }
+  //         id={ this.item.id }
+  //         title={ this.item.title }
+  //         complete={ this.item.complete }
+  //         handleComplete={ handleComplete }
+  //       />
+  //     })
+  //   </ul>
+  // );
 };
 
 ReactDOM.render(
